@@ -24,17 +24,19 @@ pub fn update_prop_z(
     if pos.is_none() {
         return;
     }
-    let pos = pos.unwrap();
+    let pos = get_surrounding_coordinates(&pos.unwrap());
 
     for (entity, position) in query.iter() {
 
         let sprite = assets.load("gard.png");
+        let mut v = super::get_world_position(&position, PROP_Z);
 
-        if position.v.x + 1 == pos.x || pos.y - 1 == position.v.y {
+        if pos.contains(&position.v) {
             prop_z += 2.;
+            v = super::get_world_position(&position, prop_z);
         }
-       // println!("{}", prop_z);
-        let v = super::get_world_position(&position, prop_z);
+       println!("{}", prop_z);
+
 
         commands.entity(entity).insert((
             SpriteBundle {
@@ -44,6 +46,16 @@ pub fn update_prop_z(
             }
         ));
     }
+}
 
+fn get_surrounding_coordinates(v: &Vector2Int) -> Vec<Vector2Int> {
+    let mut res = Vec::new();
 
+    let movements = vec![Vector2Int::new(-1, 0),Vector2Int::new(0, -1), Vector2Int::new(-1, -1), Vector2Int::new(-2, -1)];
+
+    for movement in &movements {
+        let neighbor = *v + *movement;
+        res.push(neighbor);
+    }
+    res
 }

@@ -46,11 +46,9 @@ pub fn spawn_tile_renderer(
 fn get_surrounding_coordinates(v: &Vector2Int) -> Vec<Vector2Int> {
     let mut res = Vec::new();
 
-    // Define relative movements for neighbors (up, down, left, right)
     let movements = vec![Vector2Int::new(-2, -1), Vector2Int::new(-1, 0), Vector2Int::new(0, -1),
                          Vector2Int::new(-1, -2), Vector2Int::new(0,0), Vector2Int::new(0,-2), Vector2Int::new(-2,0), Vector2Int::new(-2,-2)];
 
-    // Iterate through relative movements to find neighbors
     for movement in &movements {
         let neighbor = *v + *movement;
         res.push(neighbor);
