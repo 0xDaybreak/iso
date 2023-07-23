@@ -6,7 +6,7 @@ use bevy::prelude::*;
 use crate::board::components::Position;
 use crate::board::{TILE_HEIGHT, TILE_WIDTH};
 
-pub const PIECE_SPEED: f32 = 8.;
+pub const PIECE_SPEED: f32 = 5.;
 pub const POSITION_TOLERANCE: f32 = 0.1;
 
 fn get_world_position(position: &Position, z: f32) -> Vec3 {
@@ -28,6 +28,6 @@ pub struct GraphicsPlugin;
 impl Plugin for GraphicsPlugin {
     fn build(&self, app:&mut App) {
         app.add_systems(Update, (tiles::spawn_tile_renderer,pieces::spawn_piece_renderer,
-                                  props::spawn_prop_renderer, pieces::update_piece_position,));
+                                   props::update_prop_z, pieces::update_piece_position,));
     }
 }

@@ -30,19 +30,14 @@ pub fn spawn_piece_renderer(
 pub fn update_piece_position(
     mut commands: Commands,
     mut query: Query<(Entity, &Position, &mut Transform), With <Piece>>,
-    mut prop_query: Query<(Entity, &Position, With<Prop>), Without<Piece>>,
     time: Res<Time>,
     assets: Res<AssetServer>,
 ) {
+
     for (entity, position, mut transform) in query.iter_mut() {
 
         let mut target = super::get_world_position(&position, PIECE_Z);
 
-        if prop_query.iter().any(|prop| prop.1.v.x < position.v.x) {
-            target.z -= 2.;
-
-        }
-        println!("target.z {}", target.z);
 
         let d = (target - transform.translation).length();
 

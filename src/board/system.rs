@@ -10,8 +10,8 @@ pub fn spawn_map(
     mut current: ResMut<CurrentBoard>
 )  {
     current.tiles = HashMap::new();
-    for x in 0..10 {
-        for y in 0..10 {
+    for x in 0..20 {
+        for y in 0..20 {
 
             let v = Vector2Int::new(x as i32, y as i32);
             let tile = commands.spawn((

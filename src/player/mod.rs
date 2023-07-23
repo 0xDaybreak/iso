@@ -20,7 +20,7 @@ fn spawn_player(
     commands.spawn((
         Player,
         Piece {kind: "Player".to_string()},
-        Position { v: Vector2Int::new(0,0), pressed: Vector2Int::new(0,0)},
+        Position { v: Vector2Int::new(1,1), pressed: Vector2Int::new(0,0)},
     ));
 }
 
